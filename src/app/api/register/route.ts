@@ -15,8 +15,8 @@ export async function POST(req: Request) {
             hashedPassword,
         }
     })
-    console.log("user registered => ", user)
-
 
     return NextResponse.json(user);
 };
+
+export async function GET(req: Request) { }

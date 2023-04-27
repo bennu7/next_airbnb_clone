@@ -1,6 +1,6 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 // import NextAuth from "next-auth/next";
-import NextAuth, { AuthOptions } from "next-auth";
+import NextAuth, { AuthOptions, User } from "next-auth";
 import prisma from "@/libs/prismadb"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
@@ -62,6 +62,39 @@ export const authOptoins: AuthOptions = {
         strategy: "jwt",
     },
     secret: process.env.NEXTAUTH_SECRET as string,
+    callbacks: {
+        // async signIn(params) {
+        //     console.log("params.user.id => ", params.user.id)
+        //     console.log("signIn params => ", params);
+        //     const checkUser = prisma.account.findFirst({
+        //         where: {
+        //             userId: params.user.id
+        //         }
+        //     })
+        //     if (!checkUser) {
+        //         await prisma.user.create({
+        //             data: {
+        //                 name: params.user.name as string,
+        //                 email: params.user.email as string,
+        //                 image: params.user.image as string,
+        //             }
+        //         });
+
+        //         await prisma.account.create({
+        //             data: {
+        //                 userId: params.user.id,
+        //                 type: params.account?.type as string,
+        //                 provider: params.account?.provider as string,
+        //                 providerAccountId: params.account?.providerAccountId as string,
+        //                 access_token: params.account?.accessToken as string,
+        //             }
+        //         })
+
+        //     }
+
+        //     return true;
+        // },
+    }
 }
 
 export default NextAuth(authOptoins)
