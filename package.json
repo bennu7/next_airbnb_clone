@@ -1,6 +1,7 @@
 {
   "name": "next_airbnb",
   "version": "0.1.0",
+  "description": "develop by Code With Antonio",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -22,6 +23,7 @@
     "next": "13.3.1",
     "next-auth": "^4.22.1",
     "postcss": "8.4.23",
+    "query-string": "^8.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",

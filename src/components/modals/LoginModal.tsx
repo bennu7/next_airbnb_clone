@@ -19,7 +19,7 @@ const LoginModal = () => {
     const [isLoading, setIsloading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
-            name: '',
+            email: '',
             password: '',
         }
     });
