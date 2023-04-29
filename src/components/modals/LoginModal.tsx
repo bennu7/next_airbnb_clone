@@ -10,12 +10,14 @@ import Input from '../inputs/Input'
 import { toast } from 'react-hot-toast'
 import Button from '../Button'
 import useLoginModal from '@/hooks/useLoginModel'
+import useRegisterModal from '@/hooks/useRegisterModal'
 import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 
 const LoginModal = () => {
     const router = useRouter()
     const loginModal = useLoginModal();
+    const registerModal = useRegisterModal();
     const [isLoading, setIsloading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -48,6 +50,11 @@ const LoginModal = () => {
             setIsloading(false);
         });
     }
+
+    const toggle = useCallback(() => {
+        loginModal.onClose();
+        registerModal.onOpen();
+    }, [loginModal, registerModal])
 
     const bodyContent = (
         <div className='flex flex-col gap-4'>
@@ -94,12 +101,11 @@ const LoginModal = () => {
                 className='mt-4 font-light text-center text-neutral-500'
             >
                 <div className='flex flex-row items-center justify-center gap-2'>
-                    <div>Not have account?</div>
+                    <div>First time using Airbnb?</div>
                     <div
-                        onClick={() => { loginModal.onClose() }}
-                        // onClick={loginModal.onClose}
+                        onClick={toggle}
                         className='cursor-pointer text-neutral-800 hover:underline'
-                    >Register</div>
+                    >Create an account</div>
                 </div>
             </div>
         </div>
