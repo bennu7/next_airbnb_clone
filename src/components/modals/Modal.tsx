@@ -60,31 +60,10 @@ const Modal: React.FC<ModalProps> = ({
     return (
         <div>
             <div
-                className='
-                fixed 
-                inset-0 
-                z-50 
-                flex 
-                items-center 
-                justify-center 
-                overflow-x-hidden 
-                overflow-y-auto 
-                outline-none  
-                focus:outline-none 
-                bg-neutral-800/70'
+                className='fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none bg-neutral-800/70'
             >
                 <div
-                    className='
-                    relative 
-                    w-full 
-                    h-full 
-                    mx-auto 
-                    my-6 
-                    md:w-4/6 
-                    lg:w-3/6 
-                    xl:w-2/5 
-                    lg:h-auto 
-                    md:h-auto'
+                    className='relative w-full h-full mx-auto my-6 md:w-4/6 lg:w-3/6 xl:w-2/5 lg:h-auto md:h-auto'
                 >
                     {/* CONTENT */}
                     <div
@@ -97,21 +76,7 @@ const Modal: React.FC<ModalProps> = ({
                         `}
                     >
                         <div
-                            className='
-                                relative 
-                                flex
-                                flex-col 
-                                w-full 
-                                h-full 
-                                translate-x-0 
-                                bg-white 
-                                border-0 
-                                rounded-lg 
-                                shadow-lg 
-                                outline-none 
-                                lg:h-auto 
-                                md:h-auto 
-                                focus:outline-none'
+                            className='relative flex flex-col w-full h-full translate-x-0 bg-white border-0 rounded-lg shadow-lg outline-none lg:h-auto md:h-auto focus:outline-none'
                         >
                             {/* HEADER */}
                             <div
@@ -127,7 +92,7 @@ const Modal: React.FC<ModalProps> = ({
                             >
                                 <button
                                     onClick={handleClose}
-                                    className='absolute p-0 transition border-0  hover:opacity-70 left-9'
+                                    className='absolute p-0 transition border-0 hover:opacity-70 left-9'
                                 >
                                     <IoMdClose size={18} />
                                 </button>
@@ -149,6 +114,7 @@ const Modal: React.FC<ModalProps> = ({
                                             disabled={disabled}
                                             label={secondaryActionLabel}
                                             onClick={handleSecondaryAction}
+                                            outline
                                         />
                                     )}
 
