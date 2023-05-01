@@ -11,6 +11,7 @@ import CountrySelect from '../inputs/CountrySelect';
 import { categories } from '../navbar/Categories';
 import dynamic from 'next/dynamic';
 import Counter from '../inputs/Counter';
+import ImageUpload from '../inputs/ImageUpload';
 
 // * untuk handle step modal rent
 enum STEPS {
@@ -53,9 +54,11 @@ const RentModal = () => {
     const guestCount = watch('guestCount');
     const roomCount = watch('roomCount');
     const bathRoomCount = watch('bathRoomCount');
+    const imageSrc = watch('imageSrc');
 
     const Map = useMemo(() => dynamic(() => import('../Map'),
         { ssr: false }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     ), [location]) //? ssr = server side rendering, location it's meaning is location from watch('location')
 
     const setCustomValue = (id: string, value: any) => {
@@ -85,7 +88,7 @@ const RentModal = () => {
         return 'Back'
     }, [step])
 
-    // * Listing creation steps 1
+    // * Listing creation steps 1 (Category Selection)
     let bodyContent = (
         <div className='flex flex-col gap-8'>
             <Heading
@@ -107,7 +110,7 @@ const RentModal = () => {
         </div>
     )
 
-    // * Listing creation steps 2
+    // * Listing creation steps 2 (Location selection, Map component, Country autoComplete)
     if (step === STEPS.LOCATION) {
         bodyContent = (
             <div className='flex flex-col gap-8'>
@@ -124,7 +127,7 @@ const RentModal = () => {
         )
     }
 
-    // * Listing creation steps 3
+    // * Listing creation steps 3 (Counter components for guest, room, bathroom)
     if (step === STEPS.INFO) {
         bodyContent = (
             <div className='flex flex-col gap-8'>
@@ -151,6 +154,22 @@ const RentModal = () => {
                     subtitle='How many bathrooms do you have?'
                     value={bathRoomCount}
                     onChange={(value) => setCustomValue('bathRoomCount', value)}
+                />
+            </div>
+        )
+    }
+
+    // * Listing creation steps 4 (Image upload, Cloudinary CDN) 
+    if (step === STEPS.IMAGES) {
+        bodyContent = (
+            <div className='flex flex-col gap-8 '>
+                <Heading
+                    title='Add a photo of your place'
+                    subtitle='Show guests what your place looks like!'
+                />
+                <ImageUpload
+                    onChange={(value) => setCustomValue('imageSrc', value)}
+                    value={imageSrc}
                 />
             </div>
         )
