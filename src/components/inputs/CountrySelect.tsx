@@ -53,6 +53,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
                         primary25: '#ffe4e6'
                     }
                 })}
+                required
             />
         </div>
     )

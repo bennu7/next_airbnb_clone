@@ -5,10 +5,14 @@ import prisma from "@/libs/prismadb"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import { getToken } from "next-auth/jwt";
+
+const secret = process.env.NEXTAUTH_SECRET
 
 export const authOptoins: AuthOptions = {
     adapter: PrismaAdapter(prisma),
+    secret: process.env.NEXTAUTH_SECRET as string,
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_CLIENT_ID as string,
@@ -47,9 +51,6 @@ export const authOptoins: AuthOptions = {
 
                 return user;
             },
-            // authorize: async function (credentials: Record<"email" | "password", string> | undefined, req: Pick<RequestInternal, "query" | "headers" | "body" | "method">): Awaitable<User | null> {
-            //     throw new Error("Function not implemented.");
-            // }
         })
     ],
     pages: {
@@ -61,40 +62,7 @@ export const authOptoins: AuthOptions = {
     session: {
         strategy: "jwt",
     },
-    secret: process.env.NEXTAUTH_SECRET as string,
-    callbacks: {
-        // async signIn(params) {
-        //     console.log("params.user.id => ", params.user.id)
-        //     console.log("signIn params => ", params);
-        //     const checkUser = prisma.account.findFirst({
-        //         where: {
-        //             userId: params.user.id
-        //         }
-        //     })
-        //     if (!checkUser) {
-        //         await prisma.user.create({
-        //             data: {
-        //                 name: params.user.name as string,
-        //                 email: params.user.email as string,
-        //                 image: params.user.image as string,
-        //             }
-        //         });
-
-        //         await prisma.account.create({
-        //             data: {
-        //                 userId: params.user.id,
-        //                 type: params.account?.type as string,
-        //                 provider: params.account?.provider as string,
-        //                 providerAccountId: params.account?.providerAccountId as string,
-        //                 access_token: params.account?.accessToken as string,
-        //             }
-        //         })
-
-        //     }
-
-        //     return true;
-        // },
-    }
 }
+
 
 export default NextAuth(authOptoins)

@@ -1,5 +1,4 @@
 "use client"
-import axios from 'axios'
 import { AiFillGithub } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
 import { useCallback, useEffect, useState } from 'react'
@@ -28,11 +27,13 @@ const LoginModal = () => {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsloading(true);
+        console.log("data LoginModal => ", data);
 
         signIn("credentials", {
             ...data,
             redirect: false,
         }).then((callback) => {
+            console.log("callback LoginModal => ", callback);
             setIsloading(false);
             if (callback?.ok) {
                 toast.success("Login success");
