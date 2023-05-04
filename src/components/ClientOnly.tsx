@@ -15,6 +15,7 @@ const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
     }, [])
 
     if (!hasMounted) return null
+    console.log("hasMounted => ", hasMounted);
 
     return (
         <div>

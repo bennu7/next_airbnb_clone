@@ -1,13 +1,25 @@
 import { getServerSession } from "next-auth/next";
 import { authOptoins } from "../../pages/api/auth/[...nextauth]";
 import prisma from "../libs/prismadb";
+import { SafeUser } from "@/types";
 
 export async function getSession() {
     return await getServerSession(authOptoins)
 }
 
+export interface IUser {
+    createdAt: string;
+    updatedAt: string;
+    emailVerified: string | null;
+    id: string;
+    name: string | null;
+    email: string | null;
+    image: string | null;
+    hashedPassword: string | null;
+    favoritedIds: string[];
+}
 
-export default async function getCurrentUser() {
+export default async function getCurrentUser(): Promise<SafeUser | null> {
     try {
         const session = await getSession()
 
